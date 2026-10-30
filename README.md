@@ -1,5 +1,5 @@
 # GhostPatch
-**[Click here](https://ghostpatch.space-z.ai)**
+**[Click Here to Open Site : https://ghostpatch.space-z.ai](https://ghostpatch.space-z.ai)**
 
 Patch your videos for TikTok without losing quality.
 

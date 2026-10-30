@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Job {
+  id            String    @id @default(cuid())
+  status        String // CREATED | UPLOADING | PROCESSING | VERIFYING | DONE | FAILED
+  error         String?
+  originalName  String
+  sizeBytes     Int
+  engineMode    String // ghost | zero | inflate | convert-h264 | encode-1080 | encode-4k
+  profileVersion String?
+  meta          String? // JSON VideoMeta
+  outputSize    Int?
+  verifyReport  String? // JSON VerifyReport
+  feedback      String? // worked | compressed
+  ipHash        String?
+  createdAt     DateTime  @default(now())
+  completedAt   DateTime?
+}
+
+model EngineProfile {
+  id        String   @id // e.g. "v1-ghost"
+  version   Int
+  recipe    String // JSON recipe notes
+  active    Boolean  @default(true) // kill-switch
+  notes     String?
+  createdAt DateTime @default(now())
+}
+
+model Stat {
+  id            String @id @default("global")
+  patchesDone   Int    @default(0)
+  feedbackGood  Int    @default(0)
+  feedbackBad   Int    @default(0)
+}

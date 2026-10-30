@@ -1,0 +1,19 @@
+# Never send these to the docker builder — keeps builds fast and images slim.
+.git
+node_modules
+.next
+db
+dev.log
+server.log
+research
+tool-results
+tests
+examples
+docs
+scripts
+agent-ctx
+.env
+.env.*
+!.env.example
+*.md
+tsconfig.tsbuildinfo

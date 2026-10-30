@@ -1,0 +1,19 @@
+services:
+  ghostpatch:
+    build: .
+    image: ghostpatch
+    container_name: ghostpatch
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:/app/db/custom.db
+    volumes:
+      # SQLite (patch stats) persists across rebuilds/restarts.
+      # Uploaded job videos stay INSIDE the container filesystem on purpose:
+      # they are ephemeral (2h TTL, janitor auto-deletes) and can be large.
+      - ghostpatch-db:/app/db
+
+volumes:
+  ghostpatch-db:
